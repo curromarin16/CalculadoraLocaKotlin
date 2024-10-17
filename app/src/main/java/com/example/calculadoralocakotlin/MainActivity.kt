@@ -44,6 +44,7 @@ fun CalculadoraLoca() {
     var expresion by remember { mutableStateOf("") }
     var resultado by remember { mutableStateOf("") }
 
+    
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -56,7 +57,7 @@ fun CalculadoraLoca() {
                 .fillMaxWidth()
                 .background(Color(0xFF424242))
                 .height(100.dp),
-            contentAlignment = Alignment.Center
+                contentAlignment = Alignment.Center
         ) {
             Text(text = resultado.ifEmpty { expresion }, color = Color.White)
         }
@@ -98,6 +99,7 @@ fun CalculadoraLoca() {
             BotonOperacion("#") { expresion += "/" }
         }
 
+        
         Row(
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.SpaceEvenly
@@ -141,6 +143,7 @@ fun BotonBorrar(texto: String, onClick: () -> Unit) {
         colors = ButtonDefaults.buttonColors(containerColor = Color(0xFFFF7043))
     ) {
         Text(text = texto, color = Color.White)
+        
     }
 }
 
@@ -151,6 +154,7 @@ fun BotonIgual(texto: String, expresion: String, onResultadoChanged: (String) ->
             val resultado = evaluar(expresion).toString().replace("5", "6")
             onResultadoChanged(resultado)
         },
+        
         modifier = Modifier.size(80.dp),
         shape = RoundedCornerShape(16.dp),
         colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF4CAF50))
@@ -161,23 +165,23 @@ fun BotonIgual(texto: String, expresion: String, onResultadoChanged: (String) ->
 
 fun evaluar(expresion: String): Int {
     var total = 0
-    var numeroActual = ""
+    var numeroact = ""
     var operacion = '+'
 
     expresion.forEach { caracter ->
         when (caracter) {
             in '0'..'9' -> {
-                numeroActual += caracter
+                numeroact += caracter
             }
             '+', '-', '*', '/' -> {
-                total = hacerOperacion(total, numeroActual.toInt(), operacion)
+                total = hacerOperacion(total, numeroact.toInt(), operacion)
                 operacion = caracter
-                numeroActual = ""
+                numeroact = ""
             }
         }
     }
 
-    total = hacerOperacion(total, numeroActual.toInt(), operacion)
+    total = hacerOperacion(total, numeroact.toInt(), operacion)
     return total
 }
 
