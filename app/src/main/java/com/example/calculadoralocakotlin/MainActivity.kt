@@ -88,7 +88,6 @@ fun CalculadoraLoca() {
             BotonNumero("2") { expresion += "4" }
         }
 
-        // Fila de botones de operaciones
         Row(
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.SpaceEvenly
